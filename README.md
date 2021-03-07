@@ -3,3 +3,4 @@ A repository for drivers built specifically for AVR ATMEGA32 Microcontroller wit
 ___
 
 [AVR Assembly Tutorials](http://www.rjhcoding.com/avr-asm-tutorials.php)
+![Google icon](http://www.rjhcoding.com/images/toddler-crying.jpg)
