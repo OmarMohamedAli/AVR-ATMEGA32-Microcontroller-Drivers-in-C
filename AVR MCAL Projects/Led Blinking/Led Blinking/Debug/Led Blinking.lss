@@ -1,0 +1,356 @@
+
+Led Blinking.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000234  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  00000288  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  00000288  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000002b8  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000060  00000000  00000000  000002f4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000a27  00000000  00000000  00000354  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000621  00000000  00000000  00000d7b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000414  00000000  00000000  0000139c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000a4  00000000  00000000  000017b0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000003cf  00000000  00000000  00001854  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    0000023c  00000000  00000000  00001c23  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000050  00000000  00000000  00001e5f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 b0 00 	call	0x160	; 0x160 <main>
+  64:	0c 94 18 01 	jmp	0x230	; 0x230 <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <Port_Direction>:
+ **********************************************************************/
+char Port_Read(char base )
+{ char Reg_value ;
+	Reg_value = (*(volatile char *)(base)) ;
+	return Reg_value ;
+}
+  6c:	61 30       	cpi	r22, 0x01	; 1
+  6e:	29 f4       	brne	.+10     	; 0x7a <Port_Direction+0xe>
+  70:	e8 2f       	mov	r30, r24
+  72:	f0 e0       	ldi	r31, 0x00	; 0
+  74:	8f ef       	ldi	r24, 0xFF	; 255
+  76:	81 83       	std	Z+1, r24	; 0x01
+  78:	08 95       	ret
+  7a:	e8 2f       	mov	r30, r24
+  7c:	f0 e0       	ldi	r31, 0x00	; 0
+  7e:	11 82       	std	Z+1, r1	; 0x01
+  80:	08 95       	ret
+
+00000082 <Bin_Direction>:
+  82:	41 30       	cpi	r20, 0x01	; 1
+  84:	69 f4       	brne	.+26     	; 0xa0 <Bin_Direction+0x1e>
+  86:	e8 2f       	mov	r30, r24
+  88:	f0 e0       	ldi	r31, 0x00	; 0
+  8a:	21 81       	ldd	r18, Z+1	; 0x01
+  8c:	81 e0       	ldi	r24, 0x01	; 1
+  8e:	90 e0       	ldi	r25, 0x00	; 0
+  90:	02 c0       	rjmp	.+4      	; 0x96 <Bin_Direction+0x14>
+  92:	88 0f       	add	r24, r24
+  94:	99 1f       	adc	r25, r25
+  96:	6a 95       	dec	r22
+  98:	e2 f7       	brpl	.-8      	; 0x92 <Bin_Direction+0x10>
+  9a:	82 2b       	or	r24, r18
+  9c:	81 83       	std	Z+1, r24	; 0x01
+  9e:	08 95       	ret
+  a0:	e8 2f       	mov	r30, r24
+  a2:	f0 e0       	ldi	r31, 0x00	; 0
+  a4:	21 81       	ldd	r18, Z+1	; 0x01
+  a6:	81 e0       	ldi	r24, 0x01	; 1
+  a8:	90 e0       	ldi	r25, 0x00	; 0
+  aa:	02 c0       	rjmp	.+4      	; 0xb0 <Bin_Direction+0x2e>
+  ac:	88 0f       	add	r24, r24
+  ae:	99 1f       	adc	r25, r25
+  b0:	6a 95       	dec	r22
+  b2:	e2 f7       	brpl	.-8      	; 0xac <Bin_Direction+0x2a>
+  b4:	80 95       	com	r24
+  b6:	82 23       	and	r24, r18
+  b8:	81 83       	std	Z+1, r24	; 0x01
+  ba:	08 95       	ret
+
+000000bc <Bin_Reset>:
+  bc:	e8 2f       	mov	r30, r24
+  be:	f0 e0       	ldi	r31, 0x00	; 0
+  c0:	82 81       	ldd	r24, Z+2	; 0x02
+  c2:	21 e0       	ldi	r18, 0x01	; 1
+  c4:	30 e0       	ldi	r19, 0x00	; 0
+  c6:	02 c0       	rjmp	.+4      	; 0xcc <Bin_Reset+0x10>
+  c8:	22 0f       	add	r18, r18
+  ca:	33 1f       	adc	r19, r19
+  cc:	6a 95       	dec	r22
+  ce:	e2 f7       	brpl	.-8      	; 0xc8 <Bin_Reset+0xc>
+  d0:	20 95       	com	r18
+  d2:	28 23       	and	r18, r24
+  d4:	22 83       	std	Z+2, r18	; 0x02
+  d6:	08 95       	ret
+
+000000d8 <Bin_Set>:
+  d8:	e8 2f       	mov	r30, r24
+  da:	f0 e0       	ldi	r31, 0x00	; 0
+  dc:	82 81       	ldd	r24, Z+2	; 0x02
+  de:	21 e0       	ldi	r18, 0x01	; 1
+  e0:	30 e0       	ldi	r19, 0x00	; 0
+  e2:	02 c0       	rjmp	.+4      	; 0xe8 <Bin_Set+0x10>
+  e4:	22 0f       	add	r18, r18
+  e6:	33 1f       	adc	r19, r19
+  e8:	6a 95       	dec	r22
+  ea:	e2 f7       	brpl	.-8      	; 0xe4 <Bin_Set+0xc>
+  ec:	28 2b       	or	r18, r24
+  ee:	22 83       	std	Z+2, r18	; 0x02
+  f0:	08 95       	ret
+
+000000f2 <Port_Write>:
+  f2:	e8 2f       	mov	r30, r24
+  f4:	f0 e0       	ldi	r31, 0x00	; 0
+  f6:	62 83       	std	Z+2, r22	; 0x02
+  f8:	08 95       	ret
+
+000000fa <Pin_Write>:
+                 bin          : takes number from 0 to 7 
+				 value        : 0 or 1
+ * return      : Nothing 
+ **********************************************************************/
+void Pin_Write(char base , char bin , char value)
+{  if(value ==0)
+  fa:	41 11       	cpse	r20, r1
+  fc:	0e c0       	rjmp	.+28     	; 0x11a <Pin_Write+0x20>
+	(*(volatile char *)(base+2)) &= ~(1<<bin) ;
+  fe:	e8 2f       	mov	r30, r24
+ 100:	f0 e0       	ldi	r31, 0x00	; 0
+ 102:	22 81       	ldd	r18, Z+2	; 0x02
+ 104:	81 e0       	ldi	r24, 0x01	; 1
+ 106:	90 e0       	ldi	r25, 0x00	; 0
+ 108:	02 c0       	rjmp	.+4      	; 0x10e <Pin_Write+0x14>
+ 10a:	88 0f       	add	r24, r24
+ 10c:	99 1f       	adc	r25, r25
+ 10e:	6a 95       	dec	r22
+ 110:	e2 f7       	brpl	.-8      	; 0x10a <Pin_Write+0x10>
+ 112:	80 95       	com	r24
+ 114:	82 23       	and	r24, r18
+ 116:	82 83       	std	Z+2, r24	; 0x02
+ 118:	08 95       	ret
+	else
+	(*(volatile char *)(base+2)) |= (1<<bin) ;
+ 11a:	e8 2f       	mov	r30, r24
+ 11c:	f0 e0       	ldi	r31, 0x00	; 0
+ 11e:	22 81       	ldd	r18, Z+2	; 0x02
+ 120:	81 e0       	ldi	r24, 0x01	; 1
+ 122:	90 e0       	ldi	r25, 0x00	; 0
+ 124:	02 c0       	rjmp	.+4      	; 0x12a <Pin_Write+0x30>
+ 126:	88 0f       	add	r24, r24
+ 128:	99 1f       	adc	r25, r25
+ 12a:	6a 95       	dec	r22
+ 12c:	e2 f7       	brpl	.-8      	; 0x126 <Pin_Write+0x2c>
+ 12e:	82 2b       	or	r24, r18
+ 130:	82 83       	std	Z+2, r24	; 0x02
+ 132:	08 95       	ret
+
+00000134 <Pin_Read>:
+                 bin          : takes number from 0 to 7      
+ * return      : Nothing 
+ **********************************************************************/
+char Pin_Read(char base ,char bin )
+{   char Pin_value ;
+	Pin_value =(*(volatile char *)(base) && (1<<bin));
+ 134:	e8 2f       	mov	r30, r24
+ 136:	f0 e0       	ldi	r31, 0x00	; 0
+ 138:	80 81       	ld	r24, Z
+ 13a:	88 23       	and	r24, r24
+ 13c:	59 f0       	breq	.+22     	; 0x154 <Pin_Read+0x20>
+ 13e:	81 e0       	ldi	r24, 0x01	; 1
+ 140:	90 e0       	ldi	r25, 0x00	; 0
+ 142:	02 c0       	rjmp	.+4      	; 0x148 <Pin_Read+0x14>
+ 144:	88 0f       	add	r24, r24
+ 146:	99 1f       	adc	r25, r25
+ 148:	6a 95       	dec	r22
+ 14a:	e2 f7       	brpl	.-8      	; 0x144 <Pin_Read+0x10>
+ 14c:	89 2b       	or	r24, r25
+ 14e:	21 f4       	brne	.+8      	; 0x158 <Pin_Read+0x24>
+ 150:	80 e0       	ldi	r24, 0x00	; 0
+ 152:	03 c0       	rjmp	.+6      	; 0x15a <Pin_Read+0x26>
+ 154:	80 e0       	ldi	r24, 0x00	; 0
+ 156:	01 c0       	rjmp	.+2      	; 0x15a <Pin_Read+0x26>
+ 158:	81 e0       	ldi	r24, 0x01	; 1
+	if (Pin_value==0) return 0 ;
+ 15a:	81 11       	cpse	r24, r1
+	else return 1 ;
+ 15c:	81 e0       	ldi	r24, 0x01	; 1
+}
+ 15e:	08 95       	ret
+
+00000160 <main>:
+//#define F_CPU 8000000
+#include <util/delay.h>
+
+int main(void)
+{
+	Port_Direction(A , output);
+ 160:	61 e0       	ldi	r22, 0x01	; 1
+ 162:	89 e3       	ldi	r24, 0x39	; 57
+ 164:	0e 94 36 00 	call	0x6c	; 0x6c <Port_Direction>
+	Bin_Direction (C, 4,output);
+ 168:	41 e0       	ldi	r20, 0x01	; 1
+ 16a:	64 e0       	ldi	r22, 0x04	; 4
+ 16c:	83 e3       	ldi	r24, 0x33	; 51
+ 16e:	0e 94 41 00 	call	0x82	; 0x82 <Bin_Direction>
+	Bin_Direction (D, 0, input );
+ 172:	40 e0       	ldi	r20, 0x00	; 0
+ 174:	60 e0       	ldi	r22, 0x00	; 0
+ 176:	80 e3       	ldi	r24, 0x30	; 48
+ 178:	0e 94 41 00 	call	0x82	; 0x82 <Bin_Direction>
+	Port_Direction(B , output);
+ 17c:	61 e0       	ldi	r22, 0x01	; 1
+ 17e:	86 e3       	ldi	r24, 0x36	; 54
+ 180:	0e 94 36 00 	call	0x6c	; 0x6c <Port_Direction>
+	while (1)
+	{
+		Pin_Write(A ,1 ,1 );
+ 184:	41 e0       	ldi	r20, 0x01	; 1
+ 186:	61 e0       	ldi	r22, 0x01	; 1
+ 188:	89 e3       	ldi	r24, 0x39	; 57
+ 18a:	0e 94 7d 00 	call	0xfa	; 0xfa <Pin_Write>
+		Bin_Reset (C , 4);
+ 18e:	64 e0       	ldi	r22, 0x04	; 4
+ 190:	83 e3       	ldi	r24, 0x33	; 51
+ 192:	0e 94 5e 00 	call	0xbc	; 0xbc <Bin_Reset>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 196:	2f e9       	ldi	r18, 0x9F	; 159
+ 198:	86 e8       	ldi	r24, 0x86	; 134
+ 19a:	91 e0       	ldi	r25, 0x01	; 1
+ 19c:	21 50       	subi	r18, 0x01	; 1
+ 19e:	80 40       	sbci	r24, 0x00	; 0
+ 1a0:	90 40       	sbci	r25, 0x00	; 0
+ 1a2:	e1 f7       	brne	.-8      	; 0x19c <main+0x3c>
+ 1a4:	00 c0       	rjmp	.+0      	; 0x1a6 <main+0x46>
+ 1a6:	00 00       	nop
+		_delay_ms(500);
+		Bin_Set (C, 4);
+ 1a8:	64 e0       	ldi	r22, 0x04	; 4
+ 1aa:	83 e3       	ldi	r24, 0x33	; 51
+ 1ac:	0e 94 6c 00 	call	0xd8	; 0xd8 <Bin_Set>
+		Pin_Write(A ,1 ,0 );
+ 1b0:	40 e0       	ldi	r20, 0x00	; 0
+ 1b2:	61 e0       	ldi	r22, 0x01	; 1
+ 1b4:	89 e3       	ldi	r24, 0x39	; 57
+ 1b6:	0e 94 7d 00 	call	0xfa	; 0xfa <Pin_Write>
+ 1ba:	2f e9       	ldi	r18, 0x9F	; 159
+ 1bc:	86 e8       	ldi	r24, 0x86	; 134
+ 1be:	91 e0       	ldi	r25, 0x01	; 1
+ 1c0:	21 50       	subi	r18, 0x01	; 1
+ 1c2:	80 40       	sbci	r24, 0x00	; 0
+ 1c4:	90 40       	sbci	r25, 0x00	; 0
+ 1c6:	e1 f7       	brne	.-8      	; 0x1c0 <main+0x60>
+ 1c8:	00 c0       	rjmp	.+0      	; 0x1ca <main+0x6a>
+ 1ca:	00 00       	nop
+		_delay_ms(500);
+		Port_Write(B,255);
+ 1cc:	6f ef       	ldi	r22, 0xFF	; 255
+ 1ce:	86 e3       	ldi	r24, 0x36	; 54
+ 1d0:	0e 94 79 00 	call	0xf2	; 0xf2 <Port_Write>
+ 1d4:	2f e9       	ldi	r18, 0x9F	; 159
+ 1d6:	86 e8       	ldi	r24, 0x86	; 134
+ 1d8:	91 e0       	ldi	r25, 0x01	; 1
+ 1da:	21 50       	subi	r18, 0x01	; 1
+ 1dc:	80 40       	sbci	r24, 0x00	; 0
+ 1de:	90 40       	sbci	r25, 0x00	; 0
+ 1e0:	e1 f7       	brne	.-8      	; 0x1da <main+0x7a>
+ 1e2:	00 c0       	rjmp	.+0      	; 0x1e4 <main+0x84>
+ 1e4:	00 00       	nop
+		_delay_ms(500);
+		Port_Write(B,0);
+ 1e6:	60 e0       	ldi	r22, 0x00	; 0
+ 1e8:	86 e3       	ldi	r24, 0x36	; 54
+ 1ea:	0e 94 79 00 	call	0xf2	; 0xf2 <Port_Write>
+		if((Pin_Read(D, 0))){
+ 1ee:	60 e0       	ldi	r22, 0x00	; 0
+ 1f0:	80 e3       	ldi	r24, 0x30	; 48
+ 1f2:	0e 94 9a 00 	call	0x134	; 0x134 <Pin_Read>
+ 1f6:	88 23       	and	r24, r24
+ 1f8:	29 f2       	breq	.-118    	; 0x184 <main+0x24>
+			Bin_Set(A ,2 );
+ 1fa:	62 e0       	ldi	r22, 0x02	; 2
+ 1fc:	89 e3       	ldi	r24, 0x39	; 57
+ 1fe:	0e 94 6c 00 	call	0xd8	; 0xd8 <Bin_Set>
+ 202:	2f e9       	ldi	r18, 0x9F	; 159
+ 204:	86 e8       	ldi	r24, 0x86	; 134
+ 206:	91 e0       	ldi	r25, 0x01	; 1
+ 208:	21 50       	subi	r18, 0x01	; 1
+ 20a:	80 40       	sbci	r24, 0x00	; 0
+ 20c:	90 40       	sbci	r25, 0x00	; 0
+ 20e:	e1 f7       	brne	.-8      	; 0x208 <main+0xa8>
+ 210:	00 c0       	rjmp	.+0      	; 0x212 <main+0xb2>
+ 212:	00 00       	nop
+			_delay_ms(500);
+			Bin_Reset(A ,2 );
+ 214:	62 e0       	ldi	r22, 0x02	; 2
+ 216:	89 e3       	ldi	r24, 0x39	; 57
+ 218:	0e 94 5e 00 	call	0xbc	; 0xbc <Bin_Reset>
+ 21c:	2f e9       	ldi	r18, 0x9F	; 159
+ 21e:	86 e8       	ldi	r24, 0x86	; 134
+ 220:	91 e0       	ldi	r25, 0x01	; 1
+ 222:	21 50       	subi	r18, 0x01	; 1
+ 224:	80 40       	sbci	r24, 0x00	; 0
+ 226:	90 40       	sbci	r25, 0x00	; 0
+ 228:	e1 f7       	brne	.-8      	; 0x222 <main+0xc2>
+ 22a:	00 c0       	rjmp	.+0      	; 0x22c <main+0xcc>
+ 22c:	00 00       	nop
+ 22e:	aa cf       	rjmp	.-172    	; 0x184 <main+0x24>
+
+00000230 <_exit>:
+ 230:	f8 94       	cli
+
+00000232 <__stop_program>:
+ 232:	ff cf       	rjmp	.-2      	; 0x232 <__stop_program>
